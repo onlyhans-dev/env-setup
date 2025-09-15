@@ -54,7 +54,9 @@ Docelowy stack:
 
 > [!TIP]
 > Przed konfiguracją `powerlevel10k` warto pobrać i zainstalować którąś z czcionek [Nerd Fonts](https://www.nerdfonts.com/font-downloads). Ja zgodnie z rekomendacją użyję `Meslo Nerd Font`. Instrukcję znajdziesz [tutaj](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#manual-font-installation). Po instalacji należy ją wybrać w Windows Terminalu)
-- Otwórz plik `~/.zshrc` (jeśli używasz VSCode możesz wewnątrz terminala wpisać `code ~/.zshrc`) i zmień wartość zmiennej `ZSH_THEME` na `powerlevel10k/powerlevel10k`
+- Otwórz plik `~/.zshrc` i zmień wartość zmiennej `ZSH_THEME` na `powerlevel10k/powerlevel10k`
+> [!TIP]
+> Jeśli masz zainstalowane na Windowsie VSCode, możesz edytować ten plik wywołując `code ~/.zshrc`, ale przy pierwszym uruchomieniu VSCode będzie instalował swój serwer wewnątrz WSLa. Jeśli zamierzasz korzystać z innego IDE, możesz łatwo edytować ten plik w notatniku: `notepad.exe ~/.zshrc`
 - Wpisz `exec zsh` aby przeładować terminal i przejść do konfiguracji motywu (jeśli konfiguracja sama się nie zacznie wpisz `p10k configure`)
 - Przejdź przez konfigurację (przy pytaniu o `Instant prompt` sugeruję odpowiedzieć tak, reszta według uznania)
 - Zainstaluj `asdf`
