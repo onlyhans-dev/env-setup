@@ -39,9 +39,18 @@ Docelowy stack:
     libbz2-dev libreadline-dev libsqlite3-dev curl git \
     libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
     ```
-- Zainstaluj zsh komendą: `sudo apt install git curl zsh`
-- Zainstaluj `Oh My Zsh` komendą: `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-- Zainstaluj motyw `powerlevel10k` komendą `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"`
+- Zainstaluj zsh komendą: 
+    ```bash
+    sudo apt install git curl zsh
+    ```
+- Zainstaluj `Oh My Zsh` komendą: 
+    ```bash
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ```
+- Zainstaluj motyw `powerlevel10k` komendą 
+    ```bash
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+    ```
 
 > [!TIP]
 > Przed konfiguracją `powerlevel10k` warto pobrać i zainstalować którąś z czcionek [Nerd Fonts](https://www.nerdfonts.com/font-downloads). Ja zgodnie z rekomendacją użyję `Meslo Nerd Font`. Instrukcję znajdziesz [tutaj](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#manual-font-installation). Po instalacji należy ją wybrać w Windows Terminalu)
@@ -69,8 +78,14 @@ Docelowy stack:
 > [!WARNING]
 > Wiele poradników sugeruje dodanie `asdf` do listy pluginów w `~/.zshrc`, jednak ten plugin nie działa poprawnie z nowszymi wersjami `asdf` więc NIE należy go tam dodawać
 
--   - Zainstaluj interesujący Cię plugin (dla przykładu `nodejs`): `asdf plugin add nodejs`
--   - Zainstaluj interesującą Cię wersję zależności (w przykładzie `latest`): `asdf install nodejs latest`
+-   - Zainstaluj interesujący Cię plugin (dla przykładu `nodejs`): 
+        ```
+        asdf plugin add nodejs
+        ```
+-   - Zainstaluj interesującą Cię wersję zależności (w przykładzie `latest`): 
+        ```bash
+        asdf install nodejs latest
+        ```
 -   - (Opcjonalnie) Jeśli będziesz uruchamiał projekty które mają pliki wersji z innych narzędzi jak na przykład `.nvmrc`/`.node-version` wywołaj `"legacy_version_file = yes" > ~/.asdfrc`. Stworzy to plik konfiguracyjny dla `asdf` i włączy wsparcie dla innych plików niż `.tool-version`
 - Zainstaluj `autoenv` komendami:
     ```bash
