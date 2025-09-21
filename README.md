@@ -121,40 +121,9 @@ Jeśli chcesz mieć spójność pomiędzy Windowsem i WSL dla takich plików jak
 
 Jeśli podczas pracy często korzystasz z jakiejś sekwencji komend, podczas wpisywanie komend robisz literówki, albo często używasz jakiegoś pliku/katalogu i zapominasz gdzie on jest, to w takich sytuacjach warto wspomóc się aliasami. W pliku `.zshrc` jest sekcja z przykładami aliasów które można po prostu odkomentować, dopisać własne, lub zgodnie z sugestią w pliku zdefiniować je w osobnym pliku `$ZSH_CUSTOM/aliases.zsh` (wtedy również łatwiej je przenosić między maszynami, lub podzielić z innymi)
 
-aliasy których ja często używam używam:
-```bash
-alias open="explorer.exe ." # otwiera katalog w eksploratorze
-# skróty do listowania katalogów:
-alias ll="ls -la" 
-alias la="ls -A"
-alias wyjeb="rm -rf" # kasuje pliki z flagami -rf
-alias mk-autoenv="touch .autoenv.zsh && touch .autoenv_leave.zsh" # tworzy pliki dla autoenva, zapobiega literówkom
-# skróty dla gita:
-alias gf="git fetch"
-alias gp="git push"
-alias pn="git push --no-verify"
-alias pfn="git push --force --no-verify"
-alias pf="git push --force"
-alias rh="git reset --hard" # można wywołać samodzielnie, lub podać nazwę brancha/SHA commita
-alias gs="git fetch && git pull" # fetch & pull
-alias main-origin="git symbolic-ref --short refs/remotes/origin/HEAD" # pobiera nazwę domyślnego brancha dla repozytorium, jest to helper dla innych aliasów by developer nie musiał się zastanawiać nad nazwą domyślnego brancha (przydatne zwłaszcza jeśli są niespójne/nietypowe)
-alias main="main-origin | sed 's/^origin\///'" # pobiera nazwę domyślnego brancha, bez origin/
-alias st='git checkout $(main) && gs' # przechodzi na domyślny branch a następnie go synchronizuje
-alias gcp="git cherry-pick" # robi cherry-pick, oczekuje SHA commita
-alias wip="git add . && git commit -m 'wip' --no-verify" # zapisuje bieżące zmiany jako commit 'wip'
-alias wipp="wip && git push --no-verify" # to co wip + wypycha zmiany na branch z pominięciem git hooków
-# skróty dla narzędzi:
-alias ide="code ."
-alias poe="poetry run poe" 
-alias tscwatch="npm run tscwatch"
-# skróty per projekt (repo jako przykład):
-alias repo-cd="cd ~/git/repo"
-alias repo-start="repo-cd && npm run start"
+Moje aliasy możesz podejrzeć [tutaj](zsh-custom/aliases.zsh)
 
-alias zsh-reload="exec zsh" # restartuje powłokę, dzięki czemu zmiany w konfiguracji/aliasach wchodzą w życie
-```
-
-Jak widać wyżej, aliasy mogą się odwoływać do siebie nawzajem, więc jeśli między grupą aliasów są silne zależności, można zapewnić między nimi spójność.
+Aliasy mogą się odwoływać do siebie nawzajem, więc jeśli między grupą aliasów są silne zależności, można zapewnić między nimi spójność.
 
 ### Globalny git ignore
 
@@ -189,7 +158,7 @@ Przykłady użycia:
 Oprócz wspomnianej [wtyczki WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) jest kilka innych przydatnych wtyczek, które warto zainstalować niezależnie od technologii w jakiej się pracuje np:
 
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) - prosta wtyczka podkreślająca słowa które wyglądają na literówki. Zawiera rozszerzenia z innymi językami (w tym polskim), a jeśli jakieś słowo niesłusznie jest podkreślane, możemy dodać je do słownika użytkownika/projektu (możemy to propagować na innych developerów przez `.vscode/settings.json` w repo)
-- [Excalidraw](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor) - Excalidraw to open-source wirtualna tablica. Można korzystać z niej w [przeglądarce](https://excalidraw.com/), jednak webowa wersja może być upierdliwa przy pracy z wieloma boardami. Wtyczka do VSCode pozwala trzymać pliki lokalnie/w repozytorium i łatwo się między nimi przełączać. Dodatkowo nie wymaga zmiany kontekstu z IDE do przeglądarki co może być rozpraszające ;) 
+- [Excalidraw](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor) - Excalidraw to open-source wirtualna tablica. Można korzystać z niej w [przeglądarce](https://excalidraw.com/), jednak webowa wersja może być upierdliwa przy pracy z wieloma boardami. Wtyczka do VSCode pozwala trzymać pliki lokalnie/w repozytorium i łatwo się między nimi przełączać. Dodatkowo nie wymaga zmiany kontekstu z IDE do przeglądarki co może być rozpraszające ;) ([Polecam też prostą integrację z CLI](zsh-custom/excalidraw.zsh))
 
 ### Kolejne backupy
 
