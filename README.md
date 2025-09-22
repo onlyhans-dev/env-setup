@@ -2,6 +2,10 @@ Instrukcja konfiguracji wielozadaniowego i rozszerzalnego środowiska developers
 
 Jest to moja konfiguracja z którą żyję i pracuję od ponad 2 lat. Osoby doświadczone mogą ją dostosować pod siebie 😜
 
+# TL;DR
+
+[Tu jest wideo](https://www.youtube.com/watch?v=TsPnZ9oTqiA) jak przeklejam komendy na pałę i w 5 min mam środowisko
+
 # Czego potrzebujemy?
 
 - [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)
