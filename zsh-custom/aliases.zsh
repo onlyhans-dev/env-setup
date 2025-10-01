@@ -16,6 +16,9 @@ alias main-origin="git symbolic-ref --short refs/remotes/origin/HEAD" # pobiera 
 alias main="main-origin | sed 's/^origin\///'" # pobiera nazwę domyślnego brancha, bez origin/
 alias st='git checkout $(main) && gs' # przechodzi na domyślny branch a następnie go synchronizuje
 alias gcp="git cherry-pick" # robi cherry-pick, oczekuje SHA commita
+alias rb='git fetch && git rebase $(main-origin)' # rebase do domyślnego brancha
+alias rbc="git rebase --continue" # kontynuuje rebase w przypadku konfliktów
+alias gs="git fetch && git pull" # synchronizuje branch
 alias wip="git add . && git commit -m 'wip' --no-verify" # zapisuje bieżące zmiany jako commit 'wip'
 alias wipp="wip && git push --no-verify" # to co wip + wypycha zmiany na branch z pominięciem git hooków
 # skróty dla narzędzi:
