@@ -10,10 +10,13 @@
 # Przykład użycia z zapisem do katalogu `~/excalidraw`: exdraw test
 # Przykład użycia z zapisem do bieżącego katalogu `~/excalidraw`: exdraw ./test
 
+# Ścieżka gdzie chcę globalnie trzymać pliki excalidraw
+: ${EXCALIDRAW_STORAGE:="$HOME/excalidraw"}
+
 _exdraw_complete() {
   # CLI na tabie podpowiada nazwy plików przechowywanych w `~/excalidraw`
   local -a files
-  files=(${(f)"$(ls ~/excalidraw/*.excalidraw 2>/dev/null)"})
+  files=(${(f)"$(ls $EXCALIDRAW_STORAGE/*.excalidraw 2>/dev/null)"})
   files=(${files:#*~})   # pomiń pliki backupowe
   files=("${files[@]##*/}")   # usuń ścieżki
   files=("${files[@]%.excalidraw}") # usuń rozszerzenie
@@ -25,8 +28,8 @@ exdraw() {
   if [[ "$1" == ./* ]]; then
     file_path="$1.excalidraw"
   else
-    mkdir -p "$HOME/excalidraw"
-    file_path="$HOME/excalidraw/$1.excalidraw"
+    mkdir -p "$EXCALIDRAW_STORAGE"
+    file_path="$EXCALIDRAW_STORAGE/$1.excalidraw"
   fi
   touch $file_path
   code $file_path
