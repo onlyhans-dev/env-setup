@@ -35,3 +35,5 @@ exdraw() {
   code $file_path
 }
 compdef _exdraw_complete exdraw
+
+alias cd-exdraw='cd $EXCALIDRAW_STORAGE'
