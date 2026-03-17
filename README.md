@@ -45,7 +45,7 @@ Docelowy stack:
     ```
 - Zainstaluj zsh komendą: 
     ```bash
-    sudo apt install git curl zsh
+    sudo apt install zsh
     ```
 - Zainstaluj `Oh My Zsh` komendą: 
     ```bash
@@ -66,7 +66,7 @@ Docelowy stack:
 - Zainstaluj `asdf`
 -   - Najprostszą metodą na Ubuntu będzie pobranie binarek i rozpakowanie ich komendami (w razie potrzeby podmień wersję):
         ```bash
-        export ASDF_VERSION="0.18.0"
+        export ASDF_VERSION="0.18.1"
         curl -LO "https://github.com/asdf-vm/asdf/releases/download/v${ASDF_VERSION}/asdf-v${ASDF_VERSION}-linux-amd64.tar.gz"
         sudo tar -xzf "asdf-v${ASDF_VERSION}-linux-amd64.tar.gz" -C /usr/local/bin
         ```
@@ -92,13 +92,22 @@ Docelowy stack:
         ```bash
         asdf install nodejs latest
         ```
--   - (Opcjonalnie) Jeśli będziesz uruchamiał projekty które mają pliki wersji z innych narzędzi jak na przykład `.nvmrc`/`.node-version` wywołaj `"legacy_version_file = yes" > ~/.asdfrc`. Stworzy to plik konfiguracyjny dla `asdf` i włączy wsparcie dla innych plików niż `.tool-version`
+-   - (Opcjonalnie) Jeśli będziesz uruchamiał projekty które mają pliki wersji z innych narzędzi jak na przykład `.nvmrc`/`.node-version` wywołaj:
+        ```bash
+        printf "legacy_version_file = yes\n" > ~/.asdfrc
+        ```
+        Stworzy to plik konfiguracyjny dla `asdf` i włączy wsparcie dla innych plików niż `.tool-version`
+
 - Zainstaluj `autoenv` komendami:
     ```bash
     git clone https://github.com/Tarrasch/zsh-autoenv ~/.dotfiles/lib/zsh-autoenv
-    echo 'source ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh' >> ~/.zshrc
+    printf "\nsource ~/.dotfiles/lib/zsh-autoenv/autoenv.zsh\n" >> ~/.zshrc
     ```
-- (Opcjonalne) wygeneruj klucze SSH. Jeśli pracujesz z gitem jest to zdecydowanie wygodniejsza forma komunikacji niż za pomocą `https` 
+- (Opcjonalne) wygeneruj klucze SSH, np: 
+    ```bash
+    ssh-keygen -t ed25519 -C "twój_email@example.com"
+    ```
+Jeśli pracujesz z gitem jest to zdecydowanie wygodniejsza forma komunikacji niż za pomocą `https` 
 
 I to z grubsza tyle :) Można zacząć kodować. Poniżej jeszcze kilka dodatkowych uwag i podpowiedzi jak dostosować środowisko by przyjemnie się z nim pracowało.
 
@@ -126,6 +135,10 @@ Jeśli chcesz mieć spójność pomiędzy Windowsem i WSL dla takich plików jak
 Jeśli podczas pracy często korzystasz z jakiejś sekwencji komend, podczas wpisywanie komend robisz literówki, albo często używasz jakiegoś pliku/katalogu i zapominasz gdzie on jest, to w takich sytuacjach warto wspomóc się aliasami. W pliku `.zshrc` jest sekcja z przykładami aliasów które można po prostu odkomentować, dopisać własne, lub zgodnie z sugestią w pliku zdefiniować je w osobnym pliku `$ZSH_CUSTOM/aliases.zsh` (wtedy również łatwiej je przenosić między maszynami, lub podzielić z innymi)
 
 Moje aliasy możesz podejrzeć [tutaj](zsh-custom/aliases.zsh)
+Jeśli chcesz je sklonować i podłączyć jako symlink możesz użyć komendy:
+```bash
+ln -sf [ścieżka_do_katalogu_z_aliasami]* "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/"
+``` 
 
 Aliasy mogą się odwoływać do siebie nawzajem, więc jeśli między grupą aliasów są silne zależności, można zapewnić między nimi spójność.
 
@@ -133,15 +146,20 @@ Aliasy mogą się odwoływać do siebie nawzajem, więc jeśli między grupą al
 
 Ponieważ autoenv tworzy pliki, będą one widoczne przez git. By temu zapobiec możemy stworzyć globalny `.gitignore`, który będzie respektowany we wszystkich repozytoriach co zapobiegnie przypadkowemu dodaniu tych plików do commitu. W tym celu:
 - Stwórzmy sobie plik `~/.gitignore` gdzie będziemy listować wszystkie globalnie ignorowane pliki (składnia ta sama co w zwykłych `.gitignore`).
-- W pliku `~/.gitconfig` w sekcji [core] dopiszmy `excludesfile = ~/.gitignore`.
-Jeśli plik nie istnieje stwórzmy go, a wynik powinien wyglądać tak:
-    ```
-    [core]
-            excludesfile = ~/.gitignore
-    ```
+- Wywołaj 
+```bash
+git config --global core.excludesfile ~/.gitignore
+```
+
 
 > [!TIP]
-> Ja w swoim globalnym `.gitignore` dodałem folder `.private`. Dzięki temu wiem, że jeśli potrzebuję napisać coś na brudno zawsze mogę skorzystać z tego folderu, bez obawy że takie śmieci trafią do gita.
+> Ja w swoim globalnym `.gitignore` trzymam:
+```bash
+.private # folder z rzeczami na brudno
+.env # .env tak dla pewności
+.autoenv.zsh # pliki dla autoenv
+.autoenv_leave.zsh
+```
 
 > [!WARNING]
 > Globalny `.gitignore` może ukryć potrzebę dopisania plików do `.gitignore` projektu. Np jeśli globalnie ignorujemy `node_modules`, ale nie będzie to zawarte w projekcie, to na naszej maszynie git nie będzie widział zmian, ale inny developer po `npm i` zobaczy ich wiele i może je wypchnąć do repo.
